@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+
+/* 変数 */
+$main-color: #B5CAA0;
+
+@font-face {
+   font-family: "line-font";
+   src: url('/assets/LINESeedJP_TTF_Rg.ttf') format("truetype");
+   font-weight: normal;
+   font-style: normal;
+}
+
+body {
+   font-family: "line-font", sans-serif!important;
+}
+
+.top-box {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 50vh;
+   justify-content: flex-end;
+   .title-box {
+      text-align: center;
+   }
+}
+
+.login-box {
+   display: flex;
+   justify-content: center;
+   gap: 2rem;
+}
