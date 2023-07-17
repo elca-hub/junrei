@@ -1,24 +1,17 @@
-# README
+# 巡礼記録アプリ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+アニメの聖地はもちろん、観光名所や行きたい場所を巡る際に活用できるwebアプリ
 
-Things you may want to cover:
+## Notion
 
-* Ruby version
+具体的な案については[notion](https://crimson-gander-f25.notion.site/4112fcba63994ab39b3efaa943ca9da5?pvs=4)から。
 
-* System dependencies
+## todo
 
-* Configuration
+- [ ] E-R図の作成
+- [ ] 巡礼先情報を表示する際に使用する地図をどのように実現するか(google maps api etc.)
+- [ ] 1グループに何件巡礼先を登録できるか
 
-* Database creation
+## バージョン
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+v0.0.0
