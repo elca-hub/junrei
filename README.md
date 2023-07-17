@@ -4,7 +4,7 @@
 
 ## Notion
 
-具体的な案については[notion](https://crimson-gander-f25.notion.site/4112fcba63994ab39b3efaa943ca9da5?pvs=4)から。
+具体的な案については[notion](https://crimson-gander-f25.notion.site/4112fcba63994ab39b3efaa943ca9da5)から。
 
 ## todo
 
