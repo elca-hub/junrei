@@ -12,6 +12,17 @@
 - [ ] 巡礼先情報を表示する際に使用する地図をどのように実現するか(google maps api etc.)
 - [ ] 1グループに何件巡礼先を登録できるか
 
+## 起動方法
+
+1. `docker compose build web`
+2. `docker compose up`
+
+### gemの変更の反映
+
+1. `docker compose down`
+2. `docker compose run web bundle install`
+3. `docker compose up`
+
 ## バージョン
 
 v0.0.0
