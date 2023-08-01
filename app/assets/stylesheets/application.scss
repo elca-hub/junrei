@@ -53,3 +53,9 @@ body {
    align-items: center;
    justify-content: center;
 }
+
+.user-home-content {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
