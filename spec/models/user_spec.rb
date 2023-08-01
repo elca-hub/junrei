@@ -99,6 +99,14 @@ RSpec.describe User, type: :model do
           is_expected.to be_invalid
         end
       end
+
+      context "形式が正しくない場合" do
+        it "無効" do
+          user.email = "test"
+
+          is_expected.to be_invalid
+        end
+      end
     end
 
     describe "password" do
