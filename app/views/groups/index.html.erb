@@ -1,0 +1,14 @@
+<div class="main-box">
+  <div class="text-center">
+    <h2>グループ一覧</h2>
+    <p><%= current_user.name %>さんの登録しているグループ</p>
+  </div>
+  <div class="main-content">
+    <% if @groups.empty? %>
+      <div class="text-center">
+        <h3>まだグループを登録していないようです。</h3>
+        <p>「グループの新規追加」からグループを追加しましょう！</p>
+      </div>
+    <% end %>
+  </div>
+</div>
