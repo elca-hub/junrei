@@ -6,5 +6,5 @@ class Group < ApplicationRecord
     self.is_achieved = false
   end
 
-  validates :name, presence: true, length: {maximum: 30}
+  validates :name, presence: true, length: {maximum: 30}, uniqueness: { scope: :user }
 end
