@@ -13,7 +13,16 @@
       </div>
 
       <div class="mb-3">
+        <%= f.label :comment, "コメント", class: "form-label" %>
+        <%= f.text_area :comment, class: "form-control", style: "height: 150px; width: 350px" %>
+        <div class="form-text">50文字以内で入力してください。</div>
+      </div>
+
+      <div class="mb-3">
         <%= f.submit "新規追加", class: "btn btn-dark w-100" %>
+      </div>
+      <div class="mb-3">
+        <%= link_to "戻る", :back, class: "btn btn-outline-primary w-100" %>
       </div>
     <% end %>
   </div>
