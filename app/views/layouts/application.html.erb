@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Junrei</title>
+    <title><%= full_title(yield(:page_title)) %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
@@ -14,25 +14,7 @@
   </head>
 
   <body>
-  <% if alert.present? || notice.present? %>
-    <div class="alert alert-<%= alert.present? ? 'danger' : 'primary' %> alert-dismissible fade show custom-alert" role="alert">
-      <% if alert.present? %>
-        <% if alert.instance_of?(Array) %>
-          <h5>以下のエラーが発生しました。</h5>
-          <ul>
-            <% alert.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-          </ul>
-        <% elsif alert.instance_of?(String) %>
-          <p><%= alert %></p>
-        <% end %>
-      <% else %>
-        <p><%= notice %></p>
-      <% end %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  <% end %>
+  <%= render "common/flash" %>
   <%= yield %>
   </body>
 </html>
