@@ -23,6 +23,10 @@
 2. `docker compose run web bundle install`
 3. `docker compose up`
 
+### seedの適用
+
+`rails db:seed`
+
 ## バージョン
 
-v0.0.0
+v0.0.1

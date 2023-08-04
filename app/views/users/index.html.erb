@@ -1,0 +1,9 @@
+<div class="main-box">
+    <div class="text-center">
+        <h2>こんにちは、<%= current_user.name %>さん！</h2>
+    </div>
+    <div class="main-content user-home-content">
+        <a href="users/setting" class="btn btn-dark">ユーザ情報の設定</a>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning w-100" %>
+    </div>
+</div>
