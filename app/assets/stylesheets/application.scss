@@ -65,3 +65,14 @@ body {
    z-index: 100;
    width: 100vw;
 }
+
+.custom-alert {
+   position: fixed;
+   width: 100vw;
+   z-index: 100;
+   top: 0;
+   left: 0;
+   p, ul {
+      margin: 0;
+   }
+}
