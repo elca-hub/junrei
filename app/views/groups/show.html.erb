@@ -2,17 +2,12 @@
 
 <div class="main-box">
   <div class="text-center">
-    <h2>グループ詳細</h2>
-    <p><%= @group.name %></p>
+    <h2><%= @group.name %></h2>
+    <% if @group.comment.present? %>
+    <p><%= @group.comment %></p>
+    <% end %>
   </div>
   <div class="main-content">
-    <% if @group.comment.present? %>
-    <div clas="group-comment">
-        <h3>グループのコメント</h3>
-        <p><%= @group.comment %></p>
-    </div>
-    <% end %>
-    
     <div class="button-box">
         <%= link_to "戻る", :back, class: "btn btn-outline-primary w-100" %>
     </div>

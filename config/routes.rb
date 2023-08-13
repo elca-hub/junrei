@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   root "top#index"
   resources :users
 
-  resources :groups
+  resources :groups do
+    resources :spots
+  end
 end

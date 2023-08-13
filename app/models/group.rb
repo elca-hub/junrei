@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
   belongs_to :user
+  has_many :groups, dependent: :destroy
 
   before_create do
     self.uuid = SecureRandom.uuid
