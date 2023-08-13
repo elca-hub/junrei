@@ -16,11 +16,13 @@
         <div class="row">
           <% @groups.each do |group| %>
             <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-              <div class="card p-3 h-100">
-                <h5 class="card-title"><%= group.name %></h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary"><%= view_time(group.created_at) %></h6>
-                <p class="card-text"><%= group.comment %></p>
-              </div>
+              <a href="<%= group_path(group) %>" class="group-card-link">
+                <div class="card p-3 h-100">
+                  <h5 class="card-title"><%= group.name %></h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary"><%= view_time(group.created_at) %></h6>
+                  <p class="card-text"><%= group.comment %></p>
+                </div>
+              </a>
             </div>
           <% end %>
         </div>

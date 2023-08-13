@@ -2,7 +2,12 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # TODO: kaminariによるページネーション
     @groups = User.find(current_user.id).groups
+  end
+
+  def show
+    @group = User.find(current_user.id).groups.find(params[:id])
   end
 
   def new
