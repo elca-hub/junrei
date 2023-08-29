@@ -35,17 +35,10 @@ class SpotsController < ApplicationController
                          user_group.spots.maximum(:sort_index) + 1
                        end
 
-    if @spot.invalid?
-      redirect_to new_group_spot_path, alert: @spot.errors.full_messages[0]
-      return
-    end
-
-    begin
-      @spot.save!
-
+    if @spot.save
       redirect_to group_spots_path, notice: 'スポットの追加に成功しました。'
-    rescue StandardError
-      redirect_to new_group_spot_path, alert: 'スポットの登録中にエラーが発生しました。再度やり直してください。'
+    else
+      redirect_to new_group_spot_path, alert: @spot.errors.full_messages
     end
   end
 
@@ -57,9 +50,11 @@ class SpotsController < ApplicationController
   def update
     @group = User.find(current_user.id).groups.find(params[:group_id])
     @spot = @group.spots.find(params[:id])
-    @spot.update(spot_params)
-
-    redirect_to group_spot_path(@group.id, @spot.id), notice: 'スポットの編集に成功しました。'
+    if @spot.update(spot_params)
+      redirect_to group_spot_path(@group.id, @spot.id), notice: 'スポットの編集に成功しました。'
+    else
+      redirect_to edit_group_spot_path(@group.id, @spot.id), alert: @spot.errors.full_messages
+    end
   end
 
   private
