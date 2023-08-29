@@ -7,7 +7,7 @@ class Group < ApplicationRecord
     self.is_achieved = false
   end
 
-  validates :name, presence: true, length: {maximum: 30}, uniqueness: { scope: :user }
-  validates :comment, length: {maximum: 100}
-  validates :is_achieved, inclusion: {in: [true, false]}
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :user }
+  validates :comment, length: { maximum: 100 }
+  validates :is_achieved, inclusion: { in: [true, false] }
 end

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :groups, dependent: :destroy
 
-  validates :name, presence: true, length: {maximum: 30}, uniqueness: true
-  validates :email, length: {maximum: 255}, presence: true, uniqueness: true, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: true
+  validates :email, length: { maximum: 255 }, presence: true, uniqueness: true,
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 end

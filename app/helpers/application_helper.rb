@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def full_title(page_title = "")
-    base = "junrei" # アプリ名
+  def full_title(page_title = '')
+    base = 'junrei' # アプリ名
     page_title.present? ? "#{page_title} | #{base}" : base
   end
 
@@ -10,9 +10,9 @@ module ApplicationHelper
 
     now = Time.now
     if now.hour >= start_dark_mode_time || now.hour <= end_dark_mode_time
-      "dark"
+      'dark'
     else
-      "light"
+      'light'
     end
   end
 
