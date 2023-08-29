@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
-  subject { user } 
+  subject { user }
 
   describe "バリデーション"  do
     context "すべての属性が完璧で究極の場合" do
