@@ -154,5 +154,15 @@ RSpec.describe Spot, type: :model do
         end
       end
     end
+
+    context 'グループのspotが上限を超えた場合' do
+      before do
+        create_list(:spot, Settings.max_spot_count, group: spot.group)
+      end
+  
+      it '無効' do
+        expect(subject).to be_invalid
+      end
+    end
   end
 end
