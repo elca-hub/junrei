@@ -20,6 +20,7 @@ jobs:
           - "3306:3306"
         env:
             MYSQL_ROOT_PASSWORD: password
+            BIND_ADDRESS: 0.0.0.0
     env:
         DB_USER: root
         DB_PW: password
