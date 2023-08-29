@@ -5,7 +5,8 @@ FactoryBot.define do
     password { "password" }
 
     trait :invalid do
-      name { '' }
+      name { nil }
+      email { nil }
     end
   end
 end
