@@ -37,11 +37,11 @@ RSpec.describe Spot, type: :model do
       end
 
       context '値が重複している場合' do
-        DUPLICATE_SPOT_NAME = 'duplicate spot'
-        before { create(:spot, name: DUPLICATE_SPOT_NAME) }
+        @DUPLICATE_SPOT_NAME = 'duplicate spot'
+        before { create(:spot, name: @DUPLICATE_SPOT_NAME) }
 
         it '有効' do
-          spot.name = DUPLICATE_SPOT_NAME
+          spot.name = @DUPLICATE_SPOT_NAME
 
           is_expected.to be_valid
         end
@@ -74,11 +74,11 @@ RSpec.describe Spot, type: :model do
       end
 
       context '値が重複している場合' do
-        DUPLICATE_SPOT_MEMO = 'duplicate spot memo'
-        before { create(:spot, memo: DUPLICATE_SPOT_MEMO) }
+        @DUPLICATE_SPOT_MEMO = 'duplicate spot memo'
+        before { create(:spot, memo: @DUPLICATE_SPOT_MEMO) }
 
         it '有効' do
-          spot.memo = DUPLICATE_SPOT_MEMO
+          spot.memo = @DUPLICATE_SPOT_MEMO
 
           is_expected.to be_valid
         end
@@ -129,15 +129,15 @@ RSpec.describe Spot, type: :model do
       end
 
       describe '重複するsort_indexが存在する' do
-        DUPLICATE_SORT_INDEX = 0
+        @DUPLICATE_SORT_INDEX = 0
         before do
           @group = create(:group)
-          duplicate_spot = create(:spot, sort_index: DUPLICATE_SORT_INDEX, group: @group)
+          create(:spot, sort_index:@DUPLICATE_SORT_INDEX, group: @group)
         end
 
         context '異なるグループの場合' do
           it '有効' do
-            spot.sort_index = DUPLICATE_SORT_INDEX
+            spot.sort_index = @DUPLICATE_SORT_INDEX
 
             is_expected.to be_valid
           end
@@ -145,7 +145,7 @@ RSpec.describe Spot, type: :model do
 
         context '同じグループの場合' do
           it '無効' do
-            spot.sort_index = DUPLICATE_SORT_INDEX
+            spot.sort_index = @DUPLICATE_SORT_INDEX
             spot.group = @group
 
             is_expected.to be_invalid
