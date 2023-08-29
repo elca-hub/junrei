@@ -26,6 +26,28 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "POST /users" do
+    let(:user_params) { attributes_for(:user) }
+
+    before do
+      sign_in user
+      post user_registration_path, params: { user: user_params }
+    end
+
+    context "パラメータが正常なとき" do
+      it "/userへリダイレクト" do
+        expect(response).to redirect_to users_path
+      end
+    end
+
+    context 'グループのパラメータが無効な場合' do
+      let(:user_params) { attributes_for(:user, :invalid) }
+      it "/user/sign_inへリダイレクト" do
+        expect(response).to redirect_to user_session_path
+      end
+    end
+  end
+
   describe "DELETE /users" do
     let!(:deleted_user) { create(:user) }
 
