@@ -69,10 +69,14 @@
     <% end %>
 
     <div class="text-center">
-      <%= link_to new_group_spot_path, class: "btn btn-dark" do %>
-        <i class="bi bi-plus me-2"></i>
-        スポットの新規追加
-      <% end %>
+        <%= link_to group_path(@group), class: "btn btn-outline-primary mx-2" do %>
+            <i class="bi bi-arrow-left me-2"></i>
+            グループ詳細へ
+        <% end %>
+        <%= link_to new_group_spot_path, class: "btn btn-dark mx-2" do %>
+          <i class="bi bi-plus me-2"></i>
+          スポットの新規追加
+        <% end %>
     </div>
   </div>
 </div>
