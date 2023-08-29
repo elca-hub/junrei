@@ -2,14 +2,18 @@
 
 アニメの聖地はもちろん、観光名所や行きたい場所を巡る際に活用できるwebアプリ
 
+<p align="center">
+  <img src="app/assets/images/logo.png" width="200px">
+</p>
+
 ## Notion
 
 具体的な案については[notion](https://crimson-gander-f25.notion.site/4112fcba63994ab39b3efaa943ca9da5)から。
 
 ## todo
 
-- [ ] E-R図の作成
-- [ ] 巡礼先情報を表示する際に使用する地図をどのように実現するか(google maps api etc.)
+- [x] E-R図の作成
+- [x] 巡礼先情報を表示する際に使用する地図をどのように実現するか(google maps api etc.)
 - [ ] 1グループに何件巡礼先を登録できるか
 
 ## 起動方法
