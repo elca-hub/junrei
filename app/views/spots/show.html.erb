@@ -1,0 +1,26 @@
+<% provide(:page_title, @spot.name) %>
+
+<div class="main-box">
+  <div class="text-center mb-4">
+    <h2><%= @spot.name %></h2>
+    <% if @spot.memo.present? %>
+        <p><%= @spot.memo %></p>
+    <% end %>
+  </div>
+  <div class="main-content my-4">
+    <iframe
+        class="w-100"
+        height="250"
+        frameborder="0" style="border:0"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/place?key=<%= ENV["GOOGLE_API"] %>&q=place_id:<%= @spot.place_id %>"
+        allowfullscreen>
+    </iframe>
+  </div>
+  <div class="text-center w-100 my-2">
+    <%= link_to "編集", edit_group_spot_path(@group.id, @spot.id), class: "btn btn-outline-warning" %>
+  </div>
+  <div class="text-center w-100 my-2">
+    <%= link_to "スポット一覧へ", group_spots_path(@group.id), class: "btn btn-outline-primary" %>
+  </div>
+</div>

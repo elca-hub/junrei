@@ -1,0 +1,19 @@
+<% if alert.present? || notice.present? %>
+  <div class="alert alert-<%= alert.present? ? 'danger' : 'primary' %> alert-dismissible fade show custom-alert" role="alert">
+    <% if alert.present? %>
+      <% if alert.instance_of?(Array) %>
+        <h5>以下のエラーが発生しました。</h5>
+        <ul>
+          <% alert.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% elsif alert.instance_of?(String) %>
+        <p><%= alert %></p>
+      <% end %>
+    <% else %>
+      <p><%= notice %></p>
+    <% end %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>

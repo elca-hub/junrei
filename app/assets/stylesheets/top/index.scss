@@ -1,0 +1,25 @@
+.top-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+    justify-content: flex-end;
+    margin: 3.2rem 0;
+
+    .title-box {
+       text-align: center;
+    }
+ }
+ 
+ .login-box {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+ }
+
+.logo {
+    width: 300px;
+    max-width: 100%;
+    border: solid 2px #c62d34;
+    border-radius: 50%;
+}

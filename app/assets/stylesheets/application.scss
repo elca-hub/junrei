@@ -29,25 +29,10 @@ body {
    font-family: "line-font", sans-serif!important;
 }
 
-.top-box {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   height: 50vh;
-   justify-content: flex-end;
-   .title-box {
-      text-align: center;
-   }
-}
-
-.login-box {
-   display: flex;
-   justify-content: center;
-   gap: 2rem;
-}
-
 .main-box {
-   height: 100vh;
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   min-height: 100vh;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -64,4 +49,15 @@ body {
    position: fixed;
    z-index: 100;
    width: 100vw;
+}
+
+.custom-alert {
+   position: fixed;
+   width: 100vw;
+   z-index: 100;
+   top: 0;
+   left: 0;
+   p, ul {
+      margin: 0;
+   }
 }

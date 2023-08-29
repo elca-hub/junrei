@@ -30,6 +30,9 @@ services:
       DB_PW: password
       DB_HOST: db
       BUNDLE_PATH: /bundle
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env
     volumes:
       - .:/myapp
       - bundle_path:/bundle

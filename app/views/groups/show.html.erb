@@ -1,0 +1,25 @@
+<% provide(:page_title, @group.name) %>
+
+<div class="main-box">
+  <div class="text-center">
+    <h2><%= @group.name %></h2>
+    <% if @group.comment.present? %>
+    <p><%= @group.comment %></p>
+    <% end %>
+  </div>
+  <div class="main-content">
+    <div class="my-4">
+      <%= link_to group_spots_path(@group.id), class: "btn btn-dark w-100" do %>
+        <i class="bi bi-list me-2"></i>スポット一覧
+      <% end %>
+    </div>
+    <div class="my-4">
+      <%= link_to edit_group_path(@group.id), class: "btn btn-outline-warning w-100" do %>
+        <i class="bi bi-gear me-2"></i>グループ情報の編集
+      <% end %>
+    </div>
+    <div class="my-4">
+      <%= link_to "戻る", users_path, class: "btn btn-outline-primary w-100" %>
+    </div>
+  </div>
+</div>
