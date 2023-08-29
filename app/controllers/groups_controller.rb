@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_group_exists
 
   def index
     # TODO: kaminariによるページネーション
@@ -7,7 +8,15 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = User.find(current_user.id).groups.find(params[:id])
+    begin
+      @group = User.find(current_user.id).groups.find(params[:id])
+    rescue => e
+      if e.class == ActiveRecord::RecordNotFound
+        redirect_to groups_path, alert: "指定されたグループは存在しません。"
+      else
+        redirect_to groups_path, alert: "グループの取得中にエラーが発生しました。再度やり直してください。"
+      end
+    end
   end
 
   def new

@@ -1,5 +1,6 @@
 class SpotsController < ApplicationController
     before_action :authenticate_user!
+    before_action :check_group_exists
 
     def new
         @spot = Spot.new
