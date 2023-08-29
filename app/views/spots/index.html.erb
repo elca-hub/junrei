@@ -4,6 +4,7 @@
   <div class="text-center">
     <h2>スポット一覧</h2>
     <p><%= @group.name %>内に登録されているスポット一覧</p>
+    <p><%= @spots.count %> / <%= Settings.max_spot_count %></p>
   </div>
   <div class="main-content w-100">
     <% if @spots.empty? %>
