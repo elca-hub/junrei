@@ -1,0 +1,80 @@
+<% provide(:page_title, "スポット一覧") %>
+
+<div class="main-box">
+  <div class="text-center">
+    <h2>スポット一覧</h2>
+    <p><%= @group.name %>内に登録されているスポット一覧</p>
+  </div>
+  <div class="main-content w-100">
+    <% if @spots.empty? %>
+      <div class="text-center">
+        <h3>まだスポットを登録していないようです。</h3>
+        <p>「スポットの新規追加」からスポットを追加しましょう！</p>
+      </div>
+    <% else %>
+      <div class="spot-list">
+        <% @spots.each_with_index do |spot, i| %>
+          <div class="spot-card-box m-4" id="spotBox<%= i %>" style="position: relative;">
+            <a href="<%= group_spot_path(@group, spot) %>" class="group-card-link">
+              <div class="card p-3 h-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg">
+                            <h5 class="card-title"><%= spot.name %></h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><%= view_time(spot.created_at) %></h6>
+                            <p class="card-text"><%= spot.memo %></p>
+                        </div>
+                        <div class="col-lg">
+                            <iframe
+                                class="w-100"
+                                height="250"
+                                frameborder="0" style="border:0"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps/embed/v1/place?key=<%= ENV["GOOGLE_API"] %>&q=place_id:<%= spot.place_id %>"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          
+            <% if i < @spots.length - 1 %>
+                <div class="mx-4 text-center d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm d-flex justify-content-center align-items-center m-2">
+                                <h3 id="viewDuration<%= i %>" class="m-0">-</h3>     
+                            </div>
+                            <div class="col-sm m-2">
+                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'DRIVE')">
+                                    <i class="bi bi-car-front" style="font-size: 1.8rem;"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'WALK')">
+                                    <i class="bi bi-person" style="font-size: 1.8rem;"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'TRANSIT')">
+                                    <i class="bi bi-train-front" style="font-size: 1.8rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <i class="bi bi-arrow-down-up spot-chagne-arrow me-4" onclick="changeSpotSort(<%= i %>)"></i>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="text-center">
+      <%= link_to new_group_spot_path, class: "btn btn-dark" do %>
+        <i class="bi bi-plus me-2"></i>
+        スポットの新規追加
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "spots/index.js" %>

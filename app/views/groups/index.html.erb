@@ -5,7 +5,7 @@
     <h2>グループ一覧</h2>
     <p><%= current_user.name %>さんの登録しているグループ</p>
   </div>
-  <div class="main-content">
+  <div class="main-content w-100">
     <% if @groups.empty? %>
       <div class="text-center">
         <h3>まだグループを登録していないようです。</h3>
@@ -13,7 +13,7 @@
       </div>
     <% else %>
       <div class="container my-3">
-        <div class="row">
+        <div class="row justify-content-center">
           <% @groups.each do |group| %>
             <div class="col-sm-6 col-md-4 col-lg-3 my-3">
               <a href="<%= group_path(group) %>" class="group-card-link">

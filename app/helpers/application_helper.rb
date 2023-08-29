@@ -17,6 +17,6 @@ module ApplicationHelper
   end
 
   def view_time(time)
-    time.strftime('%Y/%m/%d/ %H:%M')
+    time.strftime('%Y/%m/%d %H:%M')
   end
 end

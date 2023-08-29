@@ -32,6 +32,48 @@ class GroupsController < ApplicationController
     end
   end
 
+  def edit
+    @group = User.find(current_user.id).groups.find(params[:id])
+  end
+
+  def update
+    @group = User.find(current_user.id).groups.find(params[:id])
+    @group.update(group_params)
+
+    redirect_to groups_path, notice: "グループの編集に成功しました。"
+  end
+
+  def destroy
+    @group = User.find(current_user.id).groups.find(params[:id])
+
+    @group.destroy
+
+    redirect_to groups_path, notice: "グループの削除に成功しました。"
+  end
+  
+
+  def update_sort
+    data = params[:spots]
+
+    if data.nil? || data.empty?
+      render json: {status: "empty"}
+      return
+    end
+
+    begin
+      data.each do |d|
+        spot = Spot.find(d[:id])
+        spot.sort_index = d[:sort_index]
+
+        spot.save!
+      end
+
+      render json: {status: "success"}
+    rescue
+      render json: {status: "error"}
+    end
+  end
+
   private
   def group_params
     params.require(:group).permit(:name, :comment)
