@@ -11,12 +11,19 @@ class Spot < ApplicationRecord
   validates :is_achieved, inclusion: { in: [true, false] }
   validates :sort_index, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  # 同じグループで同じsort_indexが存在しないかチェックする
   validate :check_duplicate_sort_index
+  validate :check_overflow_spot_count, on: :create
 
+  # 同じグループで同じsort_indexが存在しないかチェックする
   def check_duplicate_sort_index
     return unless group.spots.where(sort_index:).where.not(id:).count > 0
 
     errors.add(:sort_index, 'is duplicated')
+  end
+
+  def check_overflow_spot_count
+    return unless group.spots.count >= Settings.max_spot_count
+
+    errors.add(:group, 'is overflow')
   end
 end
