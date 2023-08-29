@@ -4,6 +4,7 @@
   <div class="text-center">
     <h2>グループ一覧</h2>
     <p><%= current_user.name %>さんの登録しているグループ</p>
+    <p><%= @groups.count %> / <%= Settings.max_group_count %></p>
   </div>
   <div class="main-content w-100">
     <% if @groups.empty? %>

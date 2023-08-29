@@ -25,17 +25,11 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = current_user
 
-    if @group.invalid?
-      redirect_to new_group_path, alert: 'グループ情報を正しく入力してください。'
-      return
-    end
 
-    begin
-      @group.save!
-
+    if @group.save
       redirect_to groups_path, notice: 'グループの追加に成功しました。'
-    rescue StandardError
-      redirect_to new_group_path, alert: 'グループの登録中にエラーが発生しました。再度やり直してください。'
+    else
+      redirect_to new_group_path, alert: @group.errors.full_messages
     end
   end
 
@@ -45,17 +39,22 @@ class GroupsController < ApplicationController
 
   def update
     @group = User.find(current_user.id).groups.find(params[:id])
-    @group.update(group_params)
-
-    redirect_to groups_path, notice: 'グループの編集に成功しました。'
+    if @group.update(group_params)
+      redirect_to groups_path, notice: 'グループの編集に成功しました。'
+    else
+      redirect_to edit_group_path(@group), alert: @group.errors.full_messages
+    end
   end
 
   def destroy
     @group = User.find(current_user.id).groups.find(params[:id])
 
-    @group.destroy
+    if @group.destroy
+      redirect_to groups_path, notice: 'グループの削除に成功しました。'
+    else
+      redirect_to groups_path, alert: @group.errors.full_messages
+    end
 
-    redirect_to groups_path, notice: 'グループの削除に成功しました。'
   end
 
   def update_sort
