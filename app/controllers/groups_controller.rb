@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
     @group.user = current_user
 
     if @group.invalid?
-      redirect_to new_group_path, alert: 'グループ情報を正しく入力してください。'
+      redirect_to new_group_path, alert: @group.errors.full_messages
       return
     end
 
