@@ -65,3 +65,7 @@ function createMarker(place) {
     infowindow.open(map);
   });
 }
+
+window.initMap = initMap;
+
+window.searchByInputValue = searchByInputValue;
