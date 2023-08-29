@@ -26,6 +26,7 @@ jobs:
         DB_HOST: 127.0.0.1
         BUNDLE_PATH: /bundle
         TZ: "Asia/Tokyo"
+        RAILS_ENV: "test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
