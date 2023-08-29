@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-  let(:group) { build(:group) }
   subject { group }
+
+  let(:group) { build(:group) }
 
   describe 'バリデーション' do
     context '全ての要素が天才的なグループ様の場合' do
       it '有効' do
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
   end
@@ -17,7 +18,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.name = 'a' * 30
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -25,7 +26,7 @@ RSpec.describe Group, type: :model do
       it '無効' do
         group.name = 'a' * 31
 
-        is_expected.to be_invalid
+        expect(subject).to be_invalid
       end
     end
 
@@ -33,7 +34,7 @@ RSpec.describe Group, type: :model do
       it '無効' do
         group.name = ''
 
-        is_expected.to be_invalid
+        expect(subject).to be_invalid
       end
     end
 
@@ -44,7 +45,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.name = duplicate_group_name
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
   end
@@ -54,7 +55,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.comment = 'a' * 100
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -62,7 +63,7 @@ RSpec.describe Group, type: :model do
       it '無効' do
         group.comment = 'a' * 101
 
-        is_expected.to be_invalid
+        expect(subject).to be_invalid
       end
     end
 
@@ -70,7 +71,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.comment = ''
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -81,7 +82,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.comment = duplicate_comment
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
   end
@@ -91,7 +92,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.is_achieved = true
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -99,7 +100,7 @@ RSpec.describe Group, type: :model do
       it '有効' do
         group.is_achieved = false
 
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -107,7 +108,7 @@ RSpec.describe Group, type: :model do
       it '無効' do
         group.is_achieved = nil
 
-        is_expected.to be_invalid
+        expect(subject).to be_invalid
       end
     end
   end

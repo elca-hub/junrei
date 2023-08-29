@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Spot, type: :model do
-  let(:spot) { build(:spot) }
   subject { spot }
+
+  let(:spot) { build(:spot) }
 
   describe 'バリデーション' do
     context '全ての要素が天才的なスポット様の場合' do
       it '有効' do
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -16,7 +17,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.name = 'a' * 100
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -24,7 +25,7 @@ RSpec.describe Spot, type: :model do
         it '無効' do
           spot.name = 'a' * 101
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -32,7 +33,7 @@ RSpec.describe Spot, type: :model do
         it '無効' do
           spot.name = ''
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -43,7 +44,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.name = duplicate_spot_name
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
     end
@@ -53,7 +54,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.memo = 'a' * 200
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -61,7 +62,7 @@ RSpec.describe Spot, type: :model do
         it '無効' do
           spot.memo = 'a' * 201
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -69,7 +70,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.memo = ''
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -80,7 +81,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.memo = duplicate_spot_memo
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
     end
@@ -90,7 +91,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.is_achieved = true
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -98,7 +99,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.is_achieved = false
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -106,7 +107,7 @@ RSpec.describe Spot, type: :model do
         it '無効' do
           spot.is_achieved = nil
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
     end
@@ -116,7 +117,7 @@ RSpec.describe Spot, type: :model do
         it '有効' do
           spot.sort_index = 0
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -124,7 +125,7 @@ RSpec.describe Spot, type: :model do
         it '無効' do
           spot.sort_index = -1
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -139,7 +140,7 @@ RSpec.describe Spot, type: :model do
           it '有効' do
             spot.sort_index = duplicate_sort_index
 
-            is_expected.to be_valid
+            expect(subject).to be_valid
           end
         end
 
@@ -148,7 +149,7 @@ RSpec.describe Spot, type: :model do
             spot.sort_index = duplicate_sort_index
             spot.group = @group
 
-            is_expected.to be_invalid
+            expect(subject).to be_invalid
           end
         end
       end

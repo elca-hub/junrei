@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { build(:user) }
   subject { user }
+
+  let(:user) { build(:user) }
 
   describe 'バリデーション' do
     context 'すべての属性が完璧で究極の場合' do
       it '有効' do
-        is_expected.to be_valid
+        expect(subject).to be_valid
       end
     end
 
@@ -17,7 +18,7 @@ RSpec.describe User, type: :model do
         it '有効' do
           user.name = 'a' * name_length
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -25,7 +26,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.name = 'a' * (name_length + 1)
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -33,7 +34,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.name = ''
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -41,7 +42,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.name = nil
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -52,7 +53,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.name = duplicate_name
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
     end
@@ -62,7 +63,7 @@ RSpec.describe User, type: :model do
         it '有効' do
           user.email = 'a' * 243 + '@example.com'
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -70,7 +71,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.email = 'a' * 244 + '@example.com'
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -78,7 +79,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.email = ''
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -86,7 +87,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.email = nil
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -96,7 +97,7 @@ RSpec.describe User, type: :model do
 
         it '無効' do
           user.email = duplicate_email
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -104,7 +105,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.email = 'test'
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
     end
@@ -115,7 +116,7 @@ RSpec.describe User, type: :model do
         it '有効' do
           user.password = 'a' * min_password_length
 
-          is_expected.to be_valid
+          expect(subject).to be_valid
         end
       end
 
@@ -123,7 +124,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.password = 'a' * (min_password_length - 1)
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -131,7 +132,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.password = ''
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
 
@@ -139,7 +140,7 @@ RSpec.describe User, type: :model do
         it '無効' do
           user.password = nil
 
-          is_expected.to be_invalid
+          expect(subject).to be_invalid
         end
       end
     end

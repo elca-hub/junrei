@@ -14,7 +14,7 @@ RSpec.describe 'Spots', type: :request do
       it 'HTTP Status 200' do
         get group_spots_path(group)
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe 'Spots', type: :request do
       it 'HTTP Status 200' do
         get group_spot_path(group, spot)
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
     end
 

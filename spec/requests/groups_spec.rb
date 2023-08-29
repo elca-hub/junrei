@@ -13,7 +13,7 @@ RSpec.describe 'Groups', type: :request do
       it 'HTTP Status 200' do
         get groups_path
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe 'Groups', type: :request do
       it 'HTTP Status 200' do
         get group_path(group)
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
     end
 
@@ -54,6 +54,7 @@ RSpec.describe 'Groups', type: :request do
         @other_user = create(:user)
         @other_group = create(:group, user: @other_user)
       end
+
       it '/groupsへリダイレクト' do
         get group_path(@other_group)
 

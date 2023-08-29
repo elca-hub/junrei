@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :request do
       it 'HTTP Status 200' do
         get users_path
 
-        expect(response).to have_http_status 200
+        expect(response).to have_http_status :ok
       end
     end
 
@@ -29,6 +29,7 @@ RSpec.describe 'Users', type: :request do
     before do
       sign_in user
     end
+
     context 'パラメータが正常なとき' do
       before do
         post user_registration_path, params: { user: attributes_for(:user) }
