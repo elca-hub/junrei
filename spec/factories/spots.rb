@@ -5,6 +5,6 @@ FactoryBot.define do
     place_id { 'testPlaceId' }
     memo { 'testMemo' }
     is_achieved  { false }
-    sort_index { 0 }
+    sequence(:sort_index) { |n| n }
   end
 end
