@@ -41,12 +41,4 @@
   </div>
 </div>
 
-<% content_for :js do %>
-  <%= javascript_import_module_tag "spots/new" %>
-<% end %>
-
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API"] %>&libraries=places&callback=initMap&v=weekly"
-  defer
->
-</script>
+<%= content_tag :script, nil, src: "https://maps.googleapis.com/maps/api/js?key=#{ENV["GOOGLE_API"]}&libraries=places&callback=initMap&v=weekly", defer: true %>

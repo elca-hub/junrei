@@ -48,20 +48,20 @@
                                 <h3 id="viewDuration<%= i %>" class="m-0">-</h3>     
                             </div>
                             <div class="col-sm m-2">
-                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'DRIVE')">
+                                <%= button_tag type: "button", class: "btn btn-outline-primary", onclick: "pushToCalcDirection(#{i}, 'DRIVE')" do %>
                                     <i class="bi bi-car-front" style="font-size: 1.8rem;"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'WALK')">
+                                <% end %>
+                                <%= button_tag type: "button", class: "btn btn-outline-primary", onclick: "pushToCalcDirection(#{i}, 'WALK')" do %>
                                     <i class="bi bi-person" style="font-size: 1.8rem;"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-primary" onclick="pushToCalcDirection(<%= i %>, 'TRANSIT')">
+                                <% end %>
+                                <%= button_tag type: "button", class: "btn btn-outline-primary", onclick: "pushToCalcDirection(#{i}, 'TRANSIT')" do %>
                                     <i class="bi bi-train-front" style="font-size: 1.8rem;"></i>
-                                </button>
+                                <% end %>
                             </div>
                         </div>
                     </div>
 
-                    <i class="bi bi-arrow-down-up spot-chagne-arrow me-4" onclick="changeSpotSort(<%= i %>)"></i>
+                    <%= content_tag :i, nil, class: "bi bi-arrow-down-up spot-chagne-arrow me-4", onclick: "changeSpotSort(#{i})" %>
                 </div>
             <% end %>
         <% end %>
@@ -76,7 +76,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :js do %>
-  <%= javascript_import_module_tag "spots/index" %>
-<% end %>

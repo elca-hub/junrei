@@ -1,10 +1,16 @@
-let spots = gon.spots.map((ele) => {
-    return {
-        id: ele.id,
-        sort_index: ele.sort_index,
-        place_id: ele.place_id
-    }
-});
+let spots;
+
+try {
+    spots = gon.spots.map((ele) => {
+        return {
+            id: ele.id,
+            sort_index: ele.sort_index,
+            place_id: ele.place_id
+        }
+    });
+} catch (e) {
+    spots = [];
+}
 
 async function getDirection(originPlaceId, destinationPlaceId, travelMode, i) {
     let res = await fetch('https://routes.googleapis.com/directions/v2:computeRoutes', {
@@ -48,7 +54,9 @@ function pushToCalcDirection(i, travelMode) {
 }
 
 async function changeSpotSort(i) {
-    if (i > spots.length - 2) return;
+    if (i > spots.length - 1) {
+        return;
+    };
 
     [spots[i], spots[i + 1]] = [spots[i + 1], spots[i]];
 
@@ -118,7 +126,7 @@ async function sendSortIndex() {
 
     const data = await res.json();
 
-    return data.status === 'ok';
+    return data.status === 'success';
 }
 
 const getCsrfToken = () => {
