@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_group_exists
+  before_action :check_group_exists, only: [:show, :edit, :update, :destroy]
 
   def index
     # TODO: kaminariによるページネーション

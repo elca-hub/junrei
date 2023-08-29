@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_group_exists
+    before_action :check_spot_exists, only: [:show, :edit, :update, :destroy]
 
     def new
         @spot = Spot.new

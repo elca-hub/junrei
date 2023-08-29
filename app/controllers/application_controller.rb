@@ -12,6 +12,16 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def check_spot_exists
+      @user  = User.find(current_user.id)
+      group_id = params[:group_id]
+      @group = @user.groups.find(group_id)
+
+      if params[:id] != nil && !@group.spots.exists?(params[:id])
+        redirect_to group_spots_path(@group), alert: "指定されたスポットは存在しません。"
+      end
+    end
+
     private
     def after_sign_in_path_for(resource_or_scope)
       "/users"
