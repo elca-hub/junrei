@@ -12,18 +12,18 @@ RSpec.describe User, type: :model do
     end
 
     describe 'name' do
-      NAME_LENGH = 30
-      context "値が#{NAME_LENGH}文字以内の場合" do
+      name_length = 30
+      context "値が#{name_length}文字以内の場合" do
         it '有効' do
-          user.name = 'a' * NAME_LENGH
+          user.name = 'a' * name_length
 
           is_expected.to be_valid
         end
       end
 
-      context "値が#{NAME_LENGH + 1}文字以上の場合" do
+      context "値が#{name_length + 1}文字以上の場合" do
         it '無効' do
-          user.name = 'a' * (NAME_LENGH + 1)
+          user.name = 'a' * (name_length + 1)
 
           is_expected.to be_invalid
         end
@@ -46,11 +46,11 @@ RSpec.describe User, type: :model do
       end
 
       context '値が重複している場合' do
-        DUPLICATE_NAME = 'duplicate'
-        before { create(:user, name: DUPLICATE_NAME) }
+        duplicate_name = 'duplicate'
+        before { create(:user, name: duplicate_name) }
 
         it '無効' do
-          user.name = DUPLICATE_NAME
+          user.name = duplicate_name
 
           is_expected.to be_invalid
         end
@@ -91,11 +91,11 @@ RSpec.describe User, type: :model do
       end
 
       context '値が重複している場合' do
-        DUPLICATE_EMAIL = 'duplicate@test.com'
-        before { create(:user, email: DUPLICATE_EMAIL) }
+        duplicate_email = 'duplicate@test.com'
+        before { create(:user, email: duplicate_email) }
 
         it '無効' do
-          user.email = DUPLICATE_EMAIL
+          user.email = duplicate_email
           is_expected.to be_invalid
         end
       end
@@ -110,18 +110,18 @@ RSpec.describe User, type: :model do
     end
 
     describe 'password' do
-      MIN_PASSWORD_LENGTH = 6
-      context "値が#{MIN_PASSWORD_LENGTH}文字以上の場合" do
+      min_password_length = 6
+      context "値が#{min_password_length}文字以上の場合" do
         it '有効' do
-          user.password = 'a' * MIN_PASSWORD_LENGTH
+          user.password = 'a' * min_password_length
 
           is_expected.to be_valid
         end
       end
 
-      context "値が#{MIN_PASSWORD_LENGTH - 1}文字以下の場合" do
+      context "値が#{min_password_length - 1}文字以下の場合" do
         it '無効' do
-          user.password = 'a' * (MIN_PASSWORD_LENGTH - 1)
+          user.password = 'a' * (min_password_length - 1)
 
           is_expected.to be_invalid
         end

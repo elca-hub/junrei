@@ -38,11 +38,11 @@ RSpec.describe Group, type: :model do
     end
 
     context '値が重複している場合' do
-      DUPLICATE_GROUP_NAME = 'duplicate'
-      before { create(:group, name: DUPLICATE_GROUP_NAME) }
+      duplicate_group_name = 'duplicate'
+      before { create(:group, name: duplicate_group_name) }
 
       it '有効' do
-        group.name = DUPLICATE_GROUP_NAME
+        group.name = duplicate_group_name
 
         is_expected.to be_valid
       end
@@ -75,11 +75,11 @@ RSpec.describe Group, type: :model do
     end
 
     context '値が重複している場合' do
-      DUPLICATE_COMMENT = 'duplicate comment'
-      before { create(:group, comment: DUPLICATE_COMMENT) }
+      duplicate_comment = 'duplicate comment'
+      before { create(:group, comment: duplicate_comment) }
 
       it '有効' do
-        group.comment = DUPLICATE_COMMENT
+        group.comment = duplicate_comment
 
         is_expected.to be_valid
       end
