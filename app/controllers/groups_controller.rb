@@ -49,9 +49,12 @@ class GroupsController < ApplicationController
   def destroy
     @group = User.find(current_user.id).groups.find(params[:id])
 
-    @group.destroy
+    if @group.destroy
+      redirect_to groups_path, notice: 'グループの削除に成功しました。'
+    else
+      redirect_to groups_path, alert: @group.errors.full_messages
+    end
 
-    redirect_to groups_path, notice: 'グループの削除に成功しました。'
   end
 
   def update_sort
