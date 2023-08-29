@@ -15,6 +15,10 @@ class SpotsController < ApplicationController
         gon.google_api = ENV['GOOGLE_API']
     end
 
+    def show
+        @spot = User.find(current_user.id).groups.find(params[:group_id]).spots.find(params[:id])
+    end
+
     def create
         @spot = Spot.new(spot_params)
 

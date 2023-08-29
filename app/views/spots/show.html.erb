@@ -1,0 +1,23 @@
+<% provide(:page_title, @spot.name) %>
+
+<div class="main-box">
+  <div class="text-center mb-4">
+    <h2><%= @spot.name %></h2>
+    <% if @spot.memo.present? %>
+        <p><%= @spot.memo %></p>
+    <% end %>
+  </div>
+  <div class="main-content my-4">
+    <iframe
+        class="w-100"
+        height="250"
+        frameborder="0" style="border:0"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/place?key=<%= ENV["GOOGLE_API"] %>&q=place_id:<%= @spot.place_id %>"
+        allowfullscreen>
+    </iframe>
+  </div>
+  <div class="text-center w-100">
+    <%= link_to "戻る", :back, class: "btn btn-outline-primary" %>
+  </div>
+</div>
