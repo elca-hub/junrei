@@ -56,14 +56,8 @@ gem 'dotenv', '~> 2.8', '>= 2.8.1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'brakeman', require: false
-  gem 'bundler-audit', '~> 0.9.1'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.2.0'
-  gem 'rspec-rails', '~> 6.0.0'
-  gem 'rubocop', '~> 1.56', '>= 1.56.2', require: false
-  gem 'rubocop-performance', '~> 1.19', require: false
-  gem 'rubocop-rspec', '~> 2.23', '>= 2.23.2', require: false
 end
 
 group :development do
@@ -75,4 +69,11 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem 'brakeman', require: false
+  gem 'bundler-audit', '~> 0.9.1'
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rubocop', '~> 1.56', '>= 1.56.2', require: false
+  gem 'rubocop-performance', '~> 1.19', require: false
+  gem 'rubocop-rspec', '~> 2.23', '>= 2.23.2', require: false
 end
