@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
     group_id = params[:group_id] || params[:id]
 
-    return unless !group_id.nil? && !@user.groups.exists?(group_id)
+    return unless !group_id.nil? && !@user.groups.exists?(id: group_id)
 
     redirect_to groups_path, alert: '指定されたグループは存在しません。'
   end
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     group_id = params[:group_id]
     @group = @user.groups.find(group_id)
 
-    return unless !params[:id].nil? && !@group.spots.exists?(params[:id])
+    return unless !params[:id].nil? && !@group.spots.exists?(id: params[:id])
 
     redirect_to group_spots_path(@group), alert: '指定されたスポットは存在しません。'
   end
