@@ -1,0 +1,20 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  Exclude:
+    - bin/**
+    - config/initializers/devise.rb
+    - config/routes.rb
+    - db/**/*
+    - db/schema.rb
+    - node_modules/**/*
+    - tmp/**/*
+    - vendor/**/*
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
