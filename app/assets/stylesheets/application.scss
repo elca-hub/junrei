@@ -29,23 +29,6 @@ body {
    font-family: "line-font", sans-serif!important;
 }
 
-.top-box {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   height: 50vh;
-   justify-content: flex-end;
-   .title-box {
-      text-align: center;
-   }
-}
-
-.login-box {
-   display: flex;
-   justify-content: center;
-   gap: 2rem;
-}
-
 .main-box {
    padding-top: 1rem;
    padding-bottom: 1rem;
