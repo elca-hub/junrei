@@ -3,7 +3,7 @@ class SpotsController < ApplicationController
 
     def new
         @spot = Spot.new
-        @group = Group.find(params[:group_id])
+        @group = User.find(current_user.id).groups.find(params[:group_id])
     end
 
     def index
@@ -16,7 +16,8 @@ class SpotsController < ApplicationController
     end
 
     def show
-        @spot = User.find(current_user.id).groups.find(params[:group_id]).spots.find(params[:id])
+        @group = User.find(current_user.id).groups.find(params[:group_id])
+        @spot = @group.spots.find(params[:id])
     end
 
     def create
@@ -45,6 +46,20 @@ class SpotsController < ApplicationController
             redirect_to new_group_spot_path, alert: "スポットの登録中にエラーが発生しました。再度やり直してください。"
         end
     end
+
+    def edit
+        @group = User.find(current_user.id).groups.find(params[:group_id])
+        @spot = @group.spots.find(params[:id])
+    end
+
+    def update
+        @group = User.find(current_user.id).groups.find(params[:group_id])
+        @spot = @group.spots.find(params[:id])
+        @spot.update(spot_params)
+
+        redirect_to group_spot_path(@group.id, @spot.id), notice: "スポットの編集に成功しました。"
+    end
+    
 
     private
     def spot_params

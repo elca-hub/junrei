@@ -1,0 +1,52 @@
+<% provide(:page_title, "スポットの編集") %>
+
+<div class="main-box">
+  <div class="text-center">
+    <h2>スポットの編集</h2>
+    <p>スポットの内容を編集します。</p>
+  </div>
+  <div class="main-content">
+    <%= form_for(@spot, url: {controller: 'spots', action: 'update', id: @spot.id, group_id: @group.id}) do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, "名称", class: "form-label" %>
+        <%= f.text_field :name, autofocus: true, class: "form-control", id: "searchSpot", placeholder: "ex) 施設名、住所、名称", value: @spot.name %>
+
+        <button type="button" class="btn btn-outline-primary my-4 w-100" onclick="searchByInputValue()">検索</button>
+
+        <div id="map" style="height:400px" class="w-100"></div>
+        <%= f.hidden_field :place_id, id: "placeId", value: @spot.place_id %>
+        <div class="form-text">
+          <ul>
+            <li>赤いマーカー部分をスポットとして登録します。</li>
+            <li>複数ヒットした場合は、最も関連性の高い地点をスポットとして選択します。</li>
+            <li>一つに絞りたい場合は、詳細な条件で検索してください。</li>
+            <li>場所によってはスポットとして登録できない場合があります。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :memo, "メモ", class: "form-label" %>
+        <%= f.text_area :memo, class: "form-control w-100", style: "height: 150px;", value: @spot.memo %>
+        <div class="form-text">200文字以内で入力してください。</div>
+      </div>
+
+      <div class="mb-3">
+        <%= f.submit "変更", class: "btn btn-dark w-100" %>
+      </div>
+      <div class="mb-3">
+        <%= link_to "戻る", :back, class: "btn btn-outline-primary w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :js do %>
+  <%= javascript_import_module_tag "spots/new" %>
+<% end %>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_API"] %>&libraries=places&callback=initMap&v=weekly"
+  defer
+>
+</script>

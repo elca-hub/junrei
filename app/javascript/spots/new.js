@@ -39,8 +39,11 @@ function initMap() {
 
   const initWord = initWords[Math.floor(Math.random() * initWords.length)];
 
-  document.getElementById("searchSpot").value = initWord;
-  searchMap(initWord);
+  const formText = document.getElementById("searchSpot").value;
+
+  if (formText === "") formText = initWord;
+
+  searchMap(formText);
 }
 
 function searchByInputValue() {
