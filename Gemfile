@@ -13,7 +13,7 @@ gem "sprockets-rails"
 gem "mysql2", "~> 0.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem 'puma', '~> 6.3', '>= 6.3.1'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -59,6 +59,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 6.0.0'
   gem "factory_bot_rails", "~> 6.2.0"
+  gem 'brakeman', :require => false
+  gem 'bundler-audit', '~> 0.9.1'
 end
 
 group :development do
