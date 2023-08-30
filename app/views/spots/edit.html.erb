@@ -34,10 +34,17 @@
       <div class="mb-3">
         <%= f.submit "変更", class: "btn btn-dark w-100" %>
       </div>
-      <div class="mb-3">
-        <%= link_to "戻る", :back, class: "btn btn-outline-primary w-100" %>
+    <% end %>
+
+    <%= form_with url: group_spot_path(@group, @spot), method: :delete do |f| %>
+      <div class="my-4">
+        <%= f.submit "削除", class: "btn btn-outline-danger w-100" %>
       </div>
     <% end %>
+
+    <div class="mb-3">
+      <%= link_to "戻る", :back, class: "btn btn-outline-primary w-100" %>
+    </div>
   </div>
 </div>
 

@@ -57,6 +57,16 @@ class SpotsController < ApplicationController
     end
   end
 
+  def destroy
+    @spot = User.find(current_user.id).groups.find(params[:group_id]).spots.find(params[:id])
+
+    if @spot.destroy
+      redirect_to group_spots_path, notice: 'スポットの削除に成功しました。'
+    else
+      redirect_to group_spots_path, alert: @spot.errors.full_messages
+    end
+  end
+
   private
 
   def spot_params
