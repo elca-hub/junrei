@@ -6,6 +6,8 @@
   <img src="app/assets/images/logo.png" width="200px">
 </p>
 
+[![Ruby on Rails CI](https://github.com/elca-hub/junrei/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/elca-hub/junrei/actions/workflows/rubyonrails.yml)
+
 ## Notion
 
 具体的な案については[notion](https://crimson-gander-f25.notion.site/4112fcba63994ab39b3efaa943ca9da5)から。
