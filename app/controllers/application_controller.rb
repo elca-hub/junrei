@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
     return unless !group_id.nil? && !@user.groups.exists?(id: group_id)
 
+    if params[:action] == 'update_sort'
+      render status: :unauthorized, json: { status: 'unauthorized', error_message: '指定されたグループは存在しません。' }
+      return
+    end
+
     redirect_to groups_path, alert: '指定されたグループは存在しません。'
   end
 
