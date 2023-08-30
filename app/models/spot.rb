@@ -11,7 +11,7 @@ class Spot < ApplicationRecord
   validates :is_achieved, inclusion: { in: [true, false] }
   validates :sort_index, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  validate :check_duplicate_sort_index
+  validate :check_duplicate_sort_index, unless: -> { validation_context == :update_sort }
   validate :check_overflow_spot_count, on: :create
 
   # 同じグループで同じsort_indexが存在しないかチェックする

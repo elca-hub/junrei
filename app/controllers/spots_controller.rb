@@ -1,7 +1,7 @@
 class SpotsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_group_exists
-  before_action :check_spot_exists, only: %i[show edit update destroy]
+  before_action :check_spot_exists
 
   def new
     @spot = Spot.new
@@ -54,6 +54,16 @@ class SpotsController < ApplicationController
       redirect_to group_spot_path(@group.id, @spot.id), notice: 'スポットの編集に成功しました。'
     else
       redirect_to edit_group_spot_path(@group.id, @spot.id), alert: @spot.errors.full_messages
+    end
+  end
+
+  def destroy
+    @spot = User.find(current_user.id).groups.find(params[:group_id]).spots.find(params[:id])
+
+    if @spot.destroy
+      redirect_to group_spots_path, notice: 'スポットの削除に成功しました。'
+    else
+      redirect_to group_spots_path, alert: @spot.errors.full_messages
     end
   end
 

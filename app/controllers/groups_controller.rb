@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_group_exists, only: %i[show edit update destroy]
+  before_action :check_group_exists
 
   def index
     # TODO: kaminariによるページネーション
@@ -24,7 +24,6 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.user = current_user
-
 
     if @group.save
       redirect_to groups_path, notice: 'グループの追加に成功しました。'
@@ -54,29 +53,54 @@ class GroupsController < ApplicationController
     else
       redirect_to groups_path, alert: @group.errors.full_messages
     end
+  end
 
+  def destroy_all_spots
+    @group = User.find(current_user.id).groups.find(params[:group_id])
+
+    if @group.spots.destroy_all
+      redirect_to group_path(@group), notice: 'スポットの全削除に成功しました。'
+    else
+      redirect_to group_path(@group), alert: @group.errors.full_messages
+    end
   end
 
   def update_sort
     data = params[:spots]
 
     if data.nil? || data.empty?
-      render json: { status: 'empty' }
+      render json: { message: '送信されたデータがありませんでした。' }, status: :bad_request
       return
     end
 
-    begin
-      data.each do |d|
-        spot = Spot.find(d[:id])
-        spot.sort_index = d[:sort_index]
+    @is_error = false
 
-        spot.save!
+    data.each do |d|
+      if d[:id].nil? || d[:sort_index].nil?
+        render json: { message: '送信されたデータが不正です。' }, status: :bad_request
+        @is_error = true
+        break
       end
 
-      render json: { status: 'success' }
-    rescue StandardError
-      render json: { status: 'error' }
+      begin
+        spot = Spot.find(d[:id])
+        spot.sort_index = d[:sort_index]
+      rescue StandardError
+        render json: { message: 'スポットのidを正しく取得することができませんでした。' }, status: :internal_server_error
+        @is_error = true
+        break
+      end
+
+      next if spot.save(context: :update_sort)
+
+      render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+      @is_error = true
+      break
     end
+
+    return if @is_error
+
+    render json: { message: '更新が完了しました。' }, status: :ok
   end
 
   private
