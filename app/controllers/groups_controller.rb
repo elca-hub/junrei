@@ -73,10 +73,13 @@ class GroupsController < ApplicationController
       return
     end
 
+    @is_error = false
+
     data.each do |d|
       if d[:id].nil? || d[:sort_index].nil?
         render json: { message: '送信されたデータが不正です。' }, status: :bad_request
-        return
+        @is_error = true
+        break
       end
 
       begin
@@ -84,14 +87,18 @@ class GroupsController < ApplicationController
         spot.sort_index = d[:sort_index]
       rescue StandardError
         render json: { message: 'スポットのidを正しく取得することができませんでした。' }, status: :internal_server_error
+        @is_error = true
+        break
       end
 
       next if spot.save(context: :update_sort)
 
       render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
-
-      return
+      @is_error = true
+      break
     end
+
+    return if @is_error
 
     render json: { message: '更新が完了しました。' }, status: :ok
   end
