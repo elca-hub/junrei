@@ -71,13 +71,13 @@ class GroupsController < ApplicationController
     data = params[:spots]
 
     if data.nil? || data.empty?
-      render json: { status: 'empty', error_message: '送信されたデータがありませんでした。' }, status: :bad_request
+      render json: { message: '送信されたデータがありませんでした。' }, status: :bad_request
       return
     end
 
     data.each do |d|
       if d[:id].nil? || d[:sort_index].nil?
-        render json: {status: 'unacceptable', error_message: '送信されたデータが不正です。'}, status: :bad_request
+        render json: { message: '送信されたデータが不正です。'}, status: :bad_request
         return
       end
 
@@ -85,17 +85,17 @@ class GroupsController < ApplicationController
         spot = Spot.find(d[:id])
         spot.sort_index = d[:sort_index]
       rescue
-        render json: { status: 'error', error_message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+        render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
       end
 
       unless spot.save(context: :update_sort)
-        render json: { status: 'error', error_message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+        render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
 
         return
       end
     end
 
-    render json: { status: 'success'}, status: :ok
+    render json: { message: '更新が完了しました。' }, status: :ok
   end
 
   private
