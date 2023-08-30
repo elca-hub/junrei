@@ -85,7 +85,7 @@ class GroupsController < ApplicationController
         spot = Spot.find(d[:id])
         spot.sort_index = d[:sort_index]
       rescue
-        render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+        render json: { message: 'スポットのidを正しく取得することができませんでした。' }, status: :internal_server_error
       end
 
       unless spot.save(context: :update_sort)
