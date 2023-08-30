@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :spots do
     end
     patch 'update_sort'
+    delete 'destroy_all_spots'
   end
 end

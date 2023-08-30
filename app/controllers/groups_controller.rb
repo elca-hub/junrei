@@ -57,6 +57,16 @@ class GroupsController < ApplicationController
 
   end
 
+  def destroy_all_spots
+    @group = User.find(current_user.id).groups.find(params[:group_id])
+
+    if @group.spots.destroy_all
+      redirect_to group_path(@group), notice: 'スポットの全削除に成功しました。'
+    else
+      redirect_to group_path(@group), alert: @group.errors.full_messages
+    end
+  end
+
   def update_sort
     data = params[:spots]
 

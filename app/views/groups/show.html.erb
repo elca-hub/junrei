@@ -9,6 +9,11 @@
   </div>
   <div class="main-content">
     <div class="my-4">
+      <%= form_with url: group_destroy_all_spots_path(@group.id), method: :delete do |f| %>
+        <%= f.submit "全スポットを削除する", class: "btn btn-danger w-100" %>
+      <% end %>
+    </div>
+    <div class="my-4">
       <%= link_to group_spots_path(@group.id), class: "btn btn-dark w-100" do %>
         <i class="bi bi-list me-2"></i>スポット一覧
       <% end %>
