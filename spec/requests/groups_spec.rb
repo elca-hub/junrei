@@ -64,7 +64,6 @@ RSpec.describe 'Groups', type: :request do
   end
 
   describe 'DELETE /groups/:group_id/delete_all_spots' do
-
     context '自身のグループのとき' do
       before do
         sign_in user
@@ -111,7 +110,7 @@ RSpec.describe 'Groups', type: :request do
       before do
         sign_in user
 
-        create_list(:spot, 3, group: group)
+        create_list(:spot, 3, group:)
 
         @spots = group.spots.order(:sort_index)
 
@@ -125,24 +124,24 @@ RSpec.describe 'Groups', type: :request do
               { id: spot.id, sort_index: spot.sort_index }
             end
           end
-  
+
           it 'HTTP Status 200' do
             patch group_update_sort_path(group), params: { spots: @send_data }, as: :json
-  
+
             expect(response).to have_http_status :ok
           end
         end
-  
+
         context '不正なパラメータのとき' do
           before do
             @send_data = @spots.map do |spot|
-              {hogehoge: spot.id, fugafuga: spot.sort_index}
+              { hogehoge: spot.id, fugafuga: spot.sort_index }
             end
           end
-  
+
           it 'HTTP Status 400' do
             patch group_update_sort_path(group), params: { spots: @send_data }, as: :json
-  
+
             expect(response).to have_http_status :bad_request
           end
         end
@@ -174,7 +173,7 @@ RSpec.describe 'Groups', type: :request do
 
     context '未ログインのとき' do
       before do
-        create_list(:spot, 3, group: group)
+        create_list(:spot, 3, group:)
 
         @spots = group.spots.order(:sort_index)
 

@@ -25,7 +25,6 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = current_user
 
-
     if @group.save
       redirect_to groups_path, notice: 'グループの追加に成功しました。'
     else
@@ -54,7 +53,6 @@ class GroupsController < ApplicationController
     else
       redirect_to groups_path, alert: @group.errors.full_messages
     end
-
   end
 
   def destroy_all_spots
@@ -77,22 +75,22 @@ class GroupsController < ApplicationController
 
     data.each do |d|
       if d[:id].nil? || d[:sort_index].nil?
-        render json: { message: '送信されたデータが不正です。'}, status: :bad_request
+        render json: { message: '送信されたデータが不正です。' }, status: :bad_request
         return
       end
 
       begin
         spot = Spot.find(d[:id])
         spot.sort_index = d[:sort_index]
-      rescue
+      rescue StandardError
         render json: { message: 'スポットのidを正しく取得することができませんでした。' }, status: :internal_server_error
       end
 
-      unless spot.save(context: :update_sort)
-        render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+      next if spot.save(context: :update_sort)
 
-        return
-      end
+      render json: { message: 'スポットの並び替えに失敗しました。' }, status: :internal_server_error
+
+      return
     end
 
     render json: { message: '更新が完了しました。' }, status: :ok
