@@ -124,9 +124,23 @@ async function sendSortIndex() {
         body: JSON.stringify({spots})
     });
 
+    if (res.status === 200) return true;
+
     const data = await res.json();
 
-    return data.status === 'success';
+    createErrorElement(data.message);
+
+    return false;
+}
+
+function createErrorElement(message) {
+    const ele = `
+    <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+        <p>${message}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `;
+    document.body.insertAdjacentHTML('afterbegin', ele);
 }
 
 const getCsrfToken = () => {
