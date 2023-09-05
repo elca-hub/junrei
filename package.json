@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "dependencies": {
+    "@hotwired/turbo-rails": "^7.3.0",
+    "esbuild": "^0.19.2",
+    "glob": "^10.3.4",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "lint": "npx prettier --write 'app/javascript/**/*.ts' && eslint app/javascript/**/*"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.54.0",
+    "@types/jquery": "^3.5.18",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
+  }
+}

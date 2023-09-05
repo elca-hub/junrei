@@ -1,6 +1,6 @@
 <% provide(:page_title, @group.name) %>
 
-<div class="main-box">
+<div class="main-box" data-controller="groups">
   <div class="text-center">
     <h2><%= @group.name %></h2>
     <% if @group.comment.present? %>

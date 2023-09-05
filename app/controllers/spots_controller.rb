@@ -67,6 +67,18 @@ class SpotsController < ApplicationController
     end
   end
 
+  def update_achieved
+    @spot = User.find(current_user.id).groups.find(params[:group_id]).spots.find(params[:spot_id])
+
+    @spot.is_achieved = !@spot.is_achieved
+
+    if @spot.save
+      render status: :ok, json: { status: 'ok', is_achieved: @spot.is_achieved }
+    else
+      render status: :internal_server_error, json: { message: @spot.errors.full_messages }
+    end
+  end
+
   private
 
   def spot_params

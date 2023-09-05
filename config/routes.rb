@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :groups do
     resources :spots do
+      patch 'update_achieved'
     end
     patch 'update_sort'
     delete 'destroy_all_spots'

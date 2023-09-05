@@ -36,6 +36,7 @@ services:
     volumes:
       - .:/myapp
       - bundle_path:/bundle
+      - node_modules_path:/myapp/node_modules
     ports:
       - "3000:3000"
     restart: always
@@ -49,3 +50,4 @@ services:
 volumes:
   mysql_volume:
   bundle_path:
+  node_modules_path:
