@@ -1,5 +1,7 @@
 export default function getCsrfTokenModule(): string {
-    const csrfTokenMeta = document.getElementsByTagName("meta").namedItem("csrf-token");
+  const csrfTokenMeta = document
+    .getElementsByTagName("meta")
+    .namedItem("csrf-token");
 
-    return csrfTokenMeta?.getAttribute("content") ??  ""; 
+  return csrfTokenMeta?.getAttribute("content") ?? "";
 }
