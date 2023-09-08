@@ -6,7 +6,7 @@
  * @param {string} elementId HTML要素のid
  * @param {() => void} execFunc クリック時に実行する関数
  */
-export default function OnclickModule(elementId: string, execFunc: () => void) {
+export default function onclickModule(elementId: string, execFunc: () => void) {
   const element = document.getElementById(elementId);
   if (!element) {
     console.warn(`No element found: ${elementId}`);
