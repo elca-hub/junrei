@@ -1,5 +1,6 @@
 {
   "name": "app",
+  "liicense": "MIT",
   "dependencies": {
     "@hotwired/turbo-rails": "^7.3.0",
     "esbuild": "^0.19.2",
