@@ -1,0 +1,9 @@
+{
+  "eslint.options": {
+    "overrideConfigFile": ".eslintrc.json",
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
+}

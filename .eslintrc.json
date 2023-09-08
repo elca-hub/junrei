@@ -6,6 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "standard-with-typescript",
         "prettier"
     ],
     "parser": "@typescript-eslint/parser",
@@ -16,5 +17,13 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "root": true
+    "rules": {
+        "new-cap": ["error", { "newIsCap": true }],
+        "curly": ["error", "multi"],
+        "no-magic-numbers": ["error", { "ignore": [0, 1, -1] }],
+        "no-undef": ["error", { "typeof": true }],
+        "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
+        "no-use-before-define": "error",
+        "camelcase": ["error", { "properties": "never" }]
+    }
 }
