@@ -96,9 +96,6 @@ async function changeSpotSort(i: number) {
   $(targetBox).animate({ top: 0 }, 0);
   $(moveBox).animate({ top: 0 }, 0);
 
-  // idの入れ替え
-  [moveBox.id, targetBox.id] = [targetBox.id, moveBox.id];
-
   // 再計算
   pushToCalcDuration(i, TravelModeEnum.DRIVE);
 
