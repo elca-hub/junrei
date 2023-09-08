@@ -31,20 +31,18 @@ export default class ChangeSpotSortUsecase implements IUsecase<changeSortSpotInp
         spots[index].changeSortIndex(spots[index + 1].getSortIndex());
         spots[index + 1].changeSortIndex(temp);
         
-        const statusCode: number = await this.junreiApi.sendSortIndex(spots);
+        const apiRes = await this.junreiApi.sendSortIndex(spots);
+        const statusCode = apiRes.status;
 
         if (statusCode === 200) {
             return this.presenter.complete(new changeSortSpotOutput(spots, null));
         } else {
-            const status = Math.floor(statusCode / 100);
             const rollback = spots;
 
-            if (status === 4) {
-                return this.presenter.fail(new changeSortSpotOutput(rollback, "エラーが発生しました。時間をおいて再度お試しください。"));
-            } else if (status === 5) {
-                return this.presenter.fail(new changeSortSpotOutput(rollback, "サーバーでエラーが発生しました。時間をおいて再度お試しください。"));
+            if (apiRes.message) {
+                return this.presenter.fail(new changeSortSpotOutput(rollback, apiRes.message)); 
             } else {
-                return this.presenter.fail(new changeSortSpotOutput(rollback, "予期せぬエラーが発生しました。時間をおいて再度お試しください。"));
+                return this.presenter.fail(new changeSortSpotOutput(rollback, "エラーが発生しました。"));
             }
         }
     }
