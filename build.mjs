@@ -31,4 +31,5 @@ if (process.argv.includes('--watch')) {
   await ctx.watch();
 } else {
   await ctx.rebuild();
+  process.exit(0);
 }
