@@ -25,6 +25,10 @@ export default class ChangeSpotSortUsecase implements IUsecase<changeSortSpotInp
             new PlaceId(spot.place_id)
         ));
 
+        const rollback = spots; // ロールバック用
+
+        if (index > inputSpots.length - 1) return this.presenter.fail(new changeSortSpotOutput(spots, "エラーが発生しました。"));
+
         [spots[index], spots[index + 1]] = [spots[index + 1], spots[index]];
 
         const temp = spots[index].getSortIndex();
@@ -34,16 +38,8 @@ export default class ChangeSpotSortUsecase implements IUsecase<changeSortSpotInp
         const apiRes = await this.junreiApi.sendSortIndex(spots);
         const statusCode = apiRes.status;
 
-        if (statusCode === 200) {
-            return this.presenter.complete(new changeSortSpotOutput(spots, null));
-        } else {
-            const rollback = spots;
-
-            if (apiRes.message) {
-                return this.presenter.fail(new changeSortSpotOutput(rollback, apiRes.message)); 
-            } else {
-                return this.presenter.fail(new changeSortSpotOutput(rollback, "エラーが発生しました。"));
-            }
-        }
+        if (statusCode === 200) return this.presenter.complete(new changeSortSpotOutput(spots, null));
+        
+        return this.presenter.fail(new changeSortSpotOutput(rollback, apiRes.message ?? "サーバーエラーが発生しました。"));
     }
 }
