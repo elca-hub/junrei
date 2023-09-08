@@ -1,7 +1,7 @@
 import onclickModule from "../modules/onclickModule";
 import IndexController from "../core/controller/spots/indexController";
-import GetDirectionUsecase from "../core/usecase/spots/index/getDirectionUsecase";
-import GetDirectionPresenter from "../core/presenter/spots/getDirectionPresenter";
+import getDurationUsecase from "../core/usecase/spots/index/getDurationUsecase";
+import GetDurationPresenter from "../core/presenter/spots/getDurationPresenter";
 import GoogleMapsApi from "../core/infrastructure/api/googleMapsApi";
 import innerTextModule from "../modules/innerTextModule";
 import getCsrfTokenModule from "../modules/getCsrfTokenModule";
@@ -11,6 +11,7 @@ import ChangeSpotSortPresenter from "../core/presenter/spots/changeSpotSortPrese
 import JunreiApi from "../core/infrastructure/api/junreiApi";
 import { createErrorElement } from "../modules/createErrorElementModule";
 import NoHTMLElementError from "../errors/NoHTMLElementError";
+import { TravelModeEnum, TravelModeType } from "../types/spots/index/travelMode";
 
 /* windowオブジェクトにgonを設定 */
 declare global {
@@ -43,19 +44,19 @@ const junreiApi = new JunreiApi(getCsrfTokenModule(), gon.group_id);
 
 /* controller */
 const indexController = new IndexController(
-  new GetDirectionUsecase(new GetDirectionPresenter(), googleMapsFetchApi),
+  new getDurationUsecase(new GetDurationPresenter(), googleMapsFetchApi),
   new ChangeSpotSortUsecase(new ChangeSpotSortPresenter(), junreiApi)
 );
 
-async function pushToCalcDirection(i: number, travelMode: google.maps.TravelMode) {
+async function pushToCalcDuration(i: number, travelMode: TravelModeType) {
   await innerTextModule(
-    `viewDirection${i}`,
+    `viewDuration${i}`,
     async () => {
       return await indexController.getDirection(
         spots[i].place_id,
         spots[i + 1].place_id,
         travelMode
-      ).then((viewModel) => viewModel.getDirection())
+      ).then((viewModel) => viewModel.getDuration())
     }
   );
 }
@@ -99,15 +100,15 @@ async function changeSpotSort(i: number) {
   [moveBox.id, targetBox.id] = [targetBox.id, moveBox.id];
 
   // 再計算
-  pushToCalcDirection(i, google.maps.TravelMode.DRIVING);
+  pushToCalcDuration(i, TravelModeEnum.DRIVE);
 
-  if (i + 1 < spots.length - 1) pushToCalcDirection(i + 1, google.maps.TravelMode.DRIVING);
-  else if (i > 0) pushToCalcDirection(i - 1, google.maps.TravelMode.DRIVING);
+  if (i + 1 < spots.length - 1) pushToCalcDuration(i + 1, TravelModeEnum.DRIVE);
+  else if (i > 0) pushToCalcDuration(i - 1, TravelModeEnum.DRIVE);
 }
 
 async function init() {
   for (let i = 0; i < spots.length - 1; i++) {
-    pushToCalcDirection(i, google.maps.TravelMode.DRIVING);
+    pushToCalcDuration(i, TravelModeEnum.DRIVE);
 
     const AchievedButtonEle = document.getElementById(`isAchievedButton${i}`);
 
@@ -115,9 +116,9 @@ async function init() {
       // switchIsAchieved(i);
     });
 
-    onclickModule(`calcDirection-${i}-Drive`, () => { pushToCalcDirection(i, google.maps.TravelMode.DRIVING) });
-    onclickModule(`calcDirection-${i}-Walk`, () => { pushToCalcDirection(i, google.maps.TravelMode.WALKING) });
-    onclickModule(`calcDirection-${i}-Transit`, () => { pushToCalcDirection(i, google.maps.TravelMode.TRANSIT) });
+    onclickModule(`calcDirection-${i}-Drive`, () => { pushToCalcDuration(i, TravelModeEnum.DRIVE) });
+    onclickModule(`calcDirection-${i}-Walk`, () => { pushToCalcDuration(i, TravelModeEnum.WALK) });
+    onclickModule(`calcDirection-${i}-Transit`, () => { pushToCalcDuration(i, TravelModeEnum.TRANSIT) });
 
     onclickModule(`changeSpotSort${i}`, () => { changeSpotSort(i) });
   }

@@ -1,31 +1,32 @@
 import { SpotType } from "../../../types/spots/index/spot";
+import { TravelModeType } from "../../../types/spots/index/travelMode";
 import { changeSortSpotInput } from "../../dto/spots/changeSortSpotDto";
-import { getDirectionInput } from "../../dto/spots/getDirectionDto";
+import { getDurationInput } from "../../dto/spots/getDurationDto";
 import ChangeSpotSortUsecase from "../../usecase/spots/index/changeSpotSortUsecase";
-import GetDirectionUsecase from "../../usecase/spots/index/getDirectionUsecase";
+import getDurationUsecase from "../../usecase/spots/index/getDurationUsecase";
 import ChangeSpotSortViewModel from "../../viewmodel/spots/changeSpotSortViewModel";
-import GetDirectionViewModel from "../../viewmodel/spots/getDirectionViewModel";
+import GetDurationViewModel from "../../viewmodel/spots/getDurationViewModel";
 
 export default class IndexController {
-    private readonly getDirectionUsecase: GetDirectionUsecase;
+    private readonly getDurationUsecase: getDurationUsecase;
     private readonly changeSortSpotUsecase: ChangeSpotSortUsecase;
 
     constructor(
-        getDirectionUsecase: GetDirectionUsecase,
+        getDurationUsecase: getDurationUsecase,
         changeSortSpotUsecase: ChangeSpotSortUsecase
     ) {
-        this.getDirectionUsecase = getDirectionUsecase;
+        this.getDurationUsecase = getDurationUsecase;
         this.changeSortSpotUsecase = changeSortSpotUsecase;
     }
 
     public async getDirection(
         originPlaceId: string,
         destinationPlaceId: string,
-        travelMode: google.maps.TravelMode
-    ): Promise<GetDirectionViewModel> {
-        const input = new getDirectionInput(originPlaceId, destinationPlaceId, travelMode);
+        travelMode: TravelModeType
+    ): Promise<GetDurationViewModel> {
+        const input = new getDurationInput(originPlaceId, destinationPlaceId, travelMode);
 
-        return await this.getDirectionUsecase.execute(input);
+        return await this.getDurationUsecase.execute(input);
     }
 
     public async changeSpotSort(

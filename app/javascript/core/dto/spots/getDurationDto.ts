@@ -1,12 +1,14 @@
-export class getDirectionInput {
+import { TravelModeType } from "../../../types/spots/index/travelMode";
+
+export class getDurationInput {
     private readonly originPlaceId: string;
     private readonly destinationPlaceId: string;
-    private readonly travelMode: google.maps.TravelMode;
+    private readonly travelMode: TravelModeType;
 
     constructor(
         originPlaceId: string,
         destinationPlaceId: string,
-        travelMode: google.maps.TravelMode
+        travelMode: TravelModeType
     ) {
         this.originPlaceId = originPlaceId;
         this.destinationPlaceId = destinationPlaceId;
@@ -17,10 +19,10 @@ export class getDirectionInput {
 
     public getDestinationPlaceId(): string { return this.destinationPlaceId; }
 
-    public getTravelMode(): google.maps.TravelMode { return this.travelMode; }
+    public getTravelMode(): TravelModeType { return this.travelMode; }
 }
 
-export class getDirectionOutput {
+export class getDurationOutput {
     private readonly duration: string;
 
     constructor(duration: string) {

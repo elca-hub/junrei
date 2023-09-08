@@ -1,11 +1,13 @@
-export default class TravelMode {
-    private readonly travelMode: google.maps.TravelMode;
+type domainTravelModeType = 'DRIVE' | 'WALK' | 'TRANSIT';
 
-    constructor(travelMode: google.maps.TravelMode) {
+export default class TravelMode {
+    private readonly travelMode: domainTravelModeType;
+
+    constructor(travelMode: domainTravelModeType) {
         this.travelMode = travelMode;
     }
 
-    public getTravelMode(): google.maps.TravelMode {
+    public getTravelMode(): domainTravelModeType {
         return this.travelMode;
     }
 }
