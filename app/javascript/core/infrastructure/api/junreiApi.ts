@@ -9,10 +9,14 @@ export default class JunreiApi {
         this.groupId = groupId;
     }
 
-    public async sendSortIndex(spots: Spot[]): Promise<number> {
+    public async sendSortIndex(spots: Spot[]): Promise<{status: number, message: string | null}> {
         const headers: HeadersInit = new Headers();
         headers.set("Content-Type", "application/json");
         headers.set("X-CSRF-Token", this.csrfToken);
+
+        const sendSpots: {id: number, sort_index: number}[] = spots.map((spot) => {
+            return {id: spot.getId(), sort_index: spot.getSortIndex()};
+        });
 
         const res = await fetch(
           `${location.origin}/groups/${this.groupId}/update_sort`,
@@ -20,10 +24,16 @@ export default class JunreiApi {
             method: "PATCH",
             credentials: "same-origin",
             headers,
-            body: JSON.stringify({ spots }),
+            body: JSON.stringify({ spots: sendSpots }),
           },
         );
 
-        return res.status;
+        if (res.status === 200) {
+            return {status: res.status, message: null};
+        } else {
+            const errorMessage = await res.json();
+
+            return {status: res.status, message: errorMessage.message};
+        }
     }
 }
