@@ -18,13 +18,16 @@ const elementIdObj: {
   placeId: string
 } = { map: "map", searchSpot: "searchSpot", placeId: "placeId" }
 
-function searchMap(query: string) {
+function searchMap(query: string): void {
   const request = { query, fields: ["name", "geometry", "icon", "place_id"] }
 
   service = new google.maps.places.PlacesService(map)
 
   service.findPlaceFromQuery(request, (results, status) => {
-    if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+    if (
+      status === google.maps.places.PlacesServiceStatus.OK &&
+      results !== null
+    ) {
       results.forEach((res) => {
         createMarker(res)
       })
@@ -54,9 +57,11 @@ function searchMap(query: string) {
   })
 }
 
-function initMap() {
+function initMap(): void {
   /* 初期位置の設定 */
-  const tokyo = new google.maps.LatLng(35.5042959, 138.4505002)
+  const lat = 35.5042959
+  const lng = 138.4505002
+  const tokyo = new google.maps.LatLng(lat, lng)
 
   infowindow = new google.maps.InfoWindow()
 
@@ -90,7 +95,7 @@ function initMap() {
   searchMap(formTextEle.value)
 }
 
-function searchByInputValue() {
+function searchByInputValue(): void {
   const searchSpotEle = document.getElementById(
     elementIdObj.searchSpot,
   ) as HTMLInputElement
@@ -104,13 +109,13 @@ function searchByInputValue() {
   searchMap(query)
 }
 
-function createMarker(place: google.maps.places.PlaceResult) {
-  if (!place.geometry?.location) return
+function createMarker(place: google.maps.places.PlaceResult): void {
+  if (place.geometry === undefined) return
 
   marker = new google.maps.Marker({ map, position: place.geometry.location })
 
   google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "")
+    infowindow.setContent(place.name ?? "")
     infowindow.open(map)
   })
 }
