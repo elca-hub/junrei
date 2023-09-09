@@ -1,13 +1,13 @@
-type domainTravelModeType = 'DRIVE' | 'WALK' | 'TRANSIT';
+type domainTravelModeType = "DRIVE" | "WALK" | "TRANSIT"
 
 export default class TravelMode {
-    private readonly travelMode: domainTravelModeType;
+  private readonly travelMode: domainTravelModeType
 
-    constructor(travelMode: domainTravelModeType) {
-        this.travelMode = travelMode;
-    }
+  constructor(travelMode: domainTravelModeType) {
+    this.travelMode = travelMode
+  }
 
-    public getTravelMode(): domainTravelModeType {
-        return this.travelMode;
-    }
+  public getTravelMode(): domainTravelModeType {
+    return this.travelMode
+  }
 }

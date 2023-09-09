@@ -1,4 +1,4 @@
 export default interface InewWindow {
-    initMap: () => void;
-    searchByInputValue: () => void;
+  initMap: () => void
+  searchByInputValue: () => void
 }

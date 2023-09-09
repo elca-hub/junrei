@@ -1,33 +1,41 @@
-import { TravelModeType } from "../../../types/spots/index/travelMode";
+import { type TravelModeType } from "../../../types/spots/index/travelMode"
 
 export class getDurationInput {
-    private readonly originPlaceId: string;
-    private readonly destinationPlaceId: string;
-    private readonly travelMode: TravelModeType;
+  private readonly originPlaceId: string
+  private readonly destinationPlaceId: string
+  private readonly travelMode: TravelModeType
 
-    constructor(
-        originPlaceId: string,
-        destinationPlaceId: string,
-        travelMode: TravelModeType
-    ) {
-        this.originPlaceId = originPlaceId;
-        this.destinationPlaceId = destinationPlaceId;
-        this.travelMode = travelMode;
-    }
+  constructor(
+    originPlaceId: string,
+    destinationPlaceId: string,
+    travelMode: TravelModeType,
+  ) {
+    this.originPlaceId = originPlaceId
+    this.destinationPlaceId = destinationPlaceId
+    this.travelMode = travelMode
+  }
 
-    public getOriginPlaceId(): string { return this.originPlaceId; }
+  public getOriginPlaceId(): string {
+    return this.originPlaceId
+  }
 
-    public getDestinationPlaceId(): string { return this.destinationPlaceId; }
+  public getDestinationPlaceId(): string {
+    return this.destinationPlaceId
+  }
 
-    public getTravelMode(): TravelModeType { return this.travelMode; }
+  public getTravelMode(): TravelModeType {
+    return this.travelMode
+  }
 }
 
 export class getDurationOutput {
-    private readonly duration: string;
+  private readonly duration: string
 
-    constructor(duration: string) {
-        this.duration = duration;
-    }
+  constructor(duration: string) {
+    this.duration = duration
+  }
 
-    public getDuration(): string { return this.duration; }
+  public getDuration(): string {
+    return this.duration
+  }
 }

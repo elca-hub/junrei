@@ -1,10 +1,10 @@
-import { getDurationOutput } from "../../dto/spots/getDurationDto";
-import GetDurationViewModel from "../../viewmodel/spots/getDurationViewModel";
+import { type getDurationOutput } from "../../dto/spots/getDurationDto"
+import GetDurationViewModel from "../../viewmodel/spots/getDurationViewModel"
 
 export default class GetDurationPresenter {
-    public complete(output: getDurationOutput): GetDurationViewModel {
-        const duration = output.getDuration();
+  public complete(output: getDurationOutput): GetDurationViewModel {
+    const duration = output.getDuration()
 
-        return new GetDurationViewModel(duration);
-    }
+    return new GetDurationViewModel(duration)
+  }
 }

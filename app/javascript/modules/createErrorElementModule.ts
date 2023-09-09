@@ -4,6 +4,6 @@ export function createErrorElement(message: string): void {
           <p>${message}</p>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-    `;
-  document.body.insertAdjacentHTML("afterbegin", ele);
+    `
+  document.body.insertAdjacentHTML("afterbegin", ele)
 }
