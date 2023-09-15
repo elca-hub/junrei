@@ -1,7 +1,7 @@
 import { type SpotType } from "../../../types/spots/index/spot"
 import { type TravelModeType } from "../../../types/spots/index/travelMode"
 import { ChangeSortSpotInput } from "../../dto/spots/changeSortSpotDto"
-import { getDurationInput as GetDurationInput } from "../../dto/spots/getDurationDto"
+import { GetDurationInput } from "../../dto/spots/getDurationDto"
 import type ChangeSpotSortUsecase from "../../usecase/spots/index/changeSpotSortUsecase"
 import type GetDurationUsecase from "../../usecase/spots/index/getDurationUsecase"
 import type ChangeSpotSortViewModel from "../../viewmodel/spots/changeSpotSortViewModel"

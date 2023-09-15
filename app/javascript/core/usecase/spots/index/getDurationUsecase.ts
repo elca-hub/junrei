@@ -1,8 +1,8 @@
 import PlaceId from "../../../domain/placeId"
 import TravelMode from "../../../domain/travelMode"
 import {
-  type getDurationInput,
-  getDurationOutput as GetDurationOutput,
+  type GetDurationInput,
+  GetDurationOutput,
 } from "../../../dto/spots/getDurationDto"
 import type GoogleMaps from "../../../infrastructure/api/googleMapsApi"
 import type GetDurationPresenter from "../../../presenter/spots/getDurationPresenter"
@@ -10,7 +10,7 @@ import type GetDurationViewModel from "../../../viewmodel/spots/getDurationViewM
 import { type IUsecase } from "../../IUsecase"
 
 export default class GetDurationUsecase
-  implements IUsecase<getDurationInput, Promise<GetDurationViewModel>>
+  implements IUsecase<GetDurationInput, Promise<GetDurationViewModel>>
 {
   private readonly googleMapsApi: GoogleMaps
   private readonly getDurationPresenter: GetDurationPresenter
@@ -23,7 +23,7 @@ export default class GetDurationUsecase
     this.getDurationPresenter = getDurationPresenter
   }
 
-  public async execute(input: getDurationInput): Promise<GetDurationViewModel> {
+  public async execute(input: GetDurationInput): Promise<GetDurationViewModel> {
     const duration = await this.googleMapsApi.getDuration(
       new PlaceId(input.getOriginPlaceId()),
       new PlaceId(input.getDestinationPlaceId()),

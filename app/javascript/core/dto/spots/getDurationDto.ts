@@ -1,6 +1,6 @@
 import { type TravelModeType } from "../../../types/spots/index/travelMode"
 
-export class getDurationInput {
+export class GetDurationInput {
   private readonly originPlaceId: string
   private readonly destinationPlaceId: string
   private readonly travelMode: TravelModeType
@@ -28,7 +28,7 @@ export class getDurationInput {
   }
 }
 
-export class getDurationOutput {
+export class GetDurationOutput {
   private readonly duration: string
 
   constructor(duration: string) {
