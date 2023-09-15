@@ -16,9 +16,9 @@
       <div class="spot-list">
         <% @spots.each_with_index do |spot, i| %>
           <div class="spot-card-box m-4" id="spotBox<%= i %>" style="position: relative;">
-            <a href="<%= group_spot_path(@group, spot) %>" class="group-card-link">
               <div class="card p-3 h-100">
                 <div class="container">
+                  <a href="<%= group_spot_path(@group, spot) %>" class="group-card-link">
                     <div class="row">
                         <div class="col-lg">
                             <h5 class="card-title"><%= spot.name %></h5>
@@ -36,8 +36,9 @@
                             </iframe>
                         </div>
                     </div>
+                  </a>
                 </div>
-                <div class="achieved-control-box">
+                <div class="achieved-control-box" style="z-index: 100;">
                   <div class="form-check form-switch">
                     <%= content_tag :input,
                         nil,
@@ -45,7 +46,6 @@
                         type: 'checkbox',
                         role: 'switch',
                         id: "isAchievedButton#{i}",
-                        onclick: "switchIsAchieved(#{i})",
                         checked: spot.is_achieved?
                     %>
                     <%= content_tag :label,
@@ -56,7 +56,6 @@
                   </div>
                 </div>
               </div>
-            </a>
           </div>
           
             <% if i < @spots.length - 1 %>

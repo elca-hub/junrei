@@ -2,21 +2,27 @@ import { type SpotType } from "../../../types/spots/index/spot"
 import { type TravelModeType } from "../../../types/spots/index/travelMode"
 import { ChangeSortSpotInput } from "../../dto/spots/changeSortSpotDto"
 import { GetDurationInput } from "../../dto/spots/getDurationDto"
+import { SwitchIsAchievedInput } from "../../dto/spots/switchIsAchievedDto"
 import type ChangeSpotSortUsecase from "../../usecase/spots/index/changeSpotSortUsecase"
 import type GetDurationUsecase from "../../usecase/spots/index/getDurationUsecase"
+import type SwitchIsAchievedUsecase from "../../usecase/spots/index/switchIsAchievedUsecase"
 import type ChangeSpotSortViewModel from "../../viewmodel/spots/changeSpotSortViewModel"
 import type GetDurationViewModel from "../../viewmodel/spots/getDurationViewModel"
+import type SwitchIsAchievedViewModel from "../../viewmodel/spots/switchIsAchievedViewModel"
 
 export default class IndexController {
   private readonly getDurationUsecase: GetDurationUsecase
   private readonly changeSortSpotUsecase: ChangeSpotSortUsecase
+  private readonly switchIsAchievedUsecase: SwitchIsAchievedUsecase
 
   constructor(
     getDurationUsecase: GetDurationUsecase,
     changeSortSpotUsecase: ChangeSpotSortUsecase,
+    switchIsAchievedUsecase: SwitchIsAchievedUsecase,
   ) {
     this.getDurationUsecase = getDurationUsecase
     this.changeSortSpotUsecase = changeSortSpotUsecase
+    this.switchIsAchievedUsecase = switchIsAchievedUsecase
   }
 
   /**
@@ -55,5 +61,11 @@ export default class IndexController {
     const input = new ChangeSortSpotInput(spots, index)
 
     return await this.changeSortSpotUsecase.execute(input)
+  }
+
+  public async switchIsAchieved(spot: SpotType): Promise<SwitchIsAchievedViewModel> {
+    const input = new SwitchIsAchievedInput(spot)
+    
+    return await this.switchIsAchievedUsecase.execute(input)
   }
 }

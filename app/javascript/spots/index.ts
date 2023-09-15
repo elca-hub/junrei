@@ -15,6 +15,8 @@ import {
   TravelModeEnum,
   type TravelModeType,
 } from "../types/spots/index/travelMode"
+import SwitchIsAchievedUsecase from "../core/usecase/spots/index/switchIsAchievedUsecase"
+import SwitchIsAchievedPresenter from "../core/presenter/spots/switchIsAchievedPresenter"
 
 /* windowオブジェクトにgonを設定 */
 declare global {
@@ -45,6 +47,7 @@ const junreiApi = new JunreiApi(getCsrfTokenModule(), gon.group_id)
 const indexController = new IndexController(
   new GetDurationUsecase(new GetDurationPresenter(), googleMapsFetchApi),
   new ChangeSpotSortUsecase(new ChangeSpotSortPresenter(), junreiApi),
+  new SwitchIsAchievedUsecase(new SwitchIsAchievedPresenter(), junreiApi)
 )
 
 async function pushToCalcDuration(
@@ -102,6 +105,13 @@ async function changeSpotSort(i: number): Promise<void> {
   else if (i > 0) await pushToCalcDuration(i - 1, TravelModeEnum.DRIVE)
 }
 
+async function switchAchieved(spot: SpotType): Promise<void> {
+  const alertMessage = await indexController.switchIsAchieved(spot)
+
+  if (alertMessage.getAlertMessage() !== null) 
+    createErrorElement(alertMessage.getAlertMessage() as string)
+}
+
 async function init(): Promise<void> {
   for (let i = 0; i < spots.length - 1; i++) {
     await pushToCalcDuration(i, TravelModeEnum.DRIVE)
@@ -109,7 +119,7 @@ async function init(): Promise<void> {
     const AchievedButtonEle = document.getElementById(`isAchievedButton${i}`)
 
     AchievedButtonEle?.addEventListener("click", () => {
-      // switchIsAchieved(i);
+      void switchAchieved(spots[i])
     })
 
     onclickModule(`calcDirection-${i}-Drive`, () => {

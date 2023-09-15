@@ -42,4 +42,23 @@ export default class JunreiApi {
       return { status: res.status, message: errorMessage.message }
     }
   }
+
+  public async sendIsAchieved(spot: Spot): Promise<{status: number, message: string | null}> {
+    const headers: HeadersInit = new Headers()
+    headers.set("Content-Type", "application/json")
+    headers.set("X-CSRF-Token", this.csrfToken)
+
+    const res = await fetch(
+      `${location.origin}/groups/${this.groupId}/spots/${spot.getId()}/update_achieved`,
+      {
+        method: "PATCH",
+        credentials: "same-origin",
+        headers,
+      }
+    )
+
+    const data = await res.json()
+
+    return { status: res.status, message: data.message ?? null}
+  }
 }
