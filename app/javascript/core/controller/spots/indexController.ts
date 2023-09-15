@@ -27,11 +27,11 @@ export default class IndexController {
 
   /**
    * travelModeに応じた、出発点から到着点までの所要時間を取得する
-   * 
+   *
    * @param originPlaceId 出発点のplaceId
    * @param destinationPlaceId 到着点のplaceId
    * @param travelMode 公共交通機関の種類
-   * @returns 
+   * @returns
    */
   public async getDirection(
     originPlaceId: string,
@@ -49,10 +49,10 @@ export default class IndexController {
 
   /**
    * indexとindex + 1のスポットの順番を入れ替える
-   * 
+   *
    * @param spots スポット全体の配列
    * @param index 変更対象のスポットのインデックス
-   * @returns 
+   * @returns
    */
   public async changeSpotSort(
     spots: SpotType[],
@@ -63,9 +63,11 @@ export default class IndexController {
     return await this.changeSortSpotUsecase.execute(input)
   }
 
-  public async switchIsAchieved(spot: SpotType): Promise<SwitchIsAchievedViewModel> {
+  public async switchIsAchieved(
+    spot: SpotType,
+  ): Promise<SwitchIsAchievedViewModel> {
     const input = new SwitchIsAchievedInput(spot)
-    
+
     return await this.switchIsAchievedUsecase.execute(input)
   }
 }

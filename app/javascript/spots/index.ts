@@ -47,7 +47,7 @@ const junreiApi = new JunreiApi(getCsrfTokenModule(), gon.group_id)
 const indexController = new IndexController(
   new GetDurationUsecase(new GetDurationPresenter(), googleMapsFetchApi),
   new ChangeSpotSortUsecase(new ChangeSpotSortPresenter(), junreiApi),
-  new SwitchIsAchievedUsecase(new SwitchIsAchievedPresenter(), junreiApi)
+  new SwitchIsAchievedUsecase(new SwitchIsAchievedPresenter(), junreiApi),
 )
 
 async function pushToCalcDuration(
@@ -108,7 +108,7 @@ async function changeSpotSort(i: number): Promise<void> {
 async function switchAchieved(spot: SpotType): Promise<void> {
   const alertMessage = await indexController.switchIsAchieved(spot)
 
-  if (alertMessage.getAlertMessage() !== null) 
+  if (alertMessage.getAlertMessage() !== null)
     createErrorElement(alertMessage.getAlertMessage() as string)
 }
 
